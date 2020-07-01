@@ -1,6 +1,9 @@
+script: 
+  - "npm run test"
+sudo: required
 language: node_js
 node_js: 
   - "stable"
 cache:
-  directories: 
+  directories:
     - "node_modules"
