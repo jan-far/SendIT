@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "exports": false,
   "scripts": {
-    "test": "mocha --require @babel/register",
+    "test": "mocha --require @babel/register --exit",
     "build": "babel server.js --out-dir build",
     "dev-start": "babel-watch server.js"
   },
