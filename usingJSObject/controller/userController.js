@@ -1,6 +1,5 @@
 import userModel from '../models/user';
 import help from './helper';
-import jwt from 'jsonwebtoken';
 
 const User = {
     create(req, res){
