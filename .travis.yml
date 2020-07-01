@@ -1,8 +1,8 @@
-before_script: chmod 0777 ./node_modules/.bin/mocha
+# before_script: chmod 0777 ./node_modules/.bin/mocha
 language: node_js
 node_js: 
   - "stable"
-install: npm install
+# install: npm install
 cache:
   directories:
     - node_modules
