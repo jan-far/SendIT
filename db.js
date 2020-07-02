@@ -29,23 +29,11 @@ const createParcelTable = () => {
     pool.query(queryText)
         .then((res) => {
             console.log(res);
-            pool.end();
-            // .then((res)=>{
-            //     console.log(res)
-            // })
-            // .catch((err)=>{
-            //     console.log(err)
-            // });
+            pool.end(() => {});
         })
         .catch((err) => {
             console.log(err);
-            pool.end();
-            // .then((res)=>{
-            //     console.log(res)
-            // })
-            // .catch((err)=>{
-            //     console.log(err)
-            // });
+            pool.end(() => {});
         });
 }
 
@@ -59,6 +47,7 @@ const createUserTable = () => {
         email VARCHAR(128) UNIQUE NOT NULL,
         password VARCHAR(128) NOT NULL,
         phone VARCHAR(128) NOT NULL,
+        role integer NOT NULL,
         created_date TIMESTAMP,
         modified_date TIMESTAMP
       )`;
@@ -66,23 +55,11 @@ const createUserTable = () => {
     pool.query(queryText)
         .then((res) => {
             console.log(res);
-            pool.end();
-            // .then((res)=>{
-            //     console.log(res)
-            // })
-            // .catch((err)=>{
-            //     console.log(err)
-            // });
+            pool.end(() => {});
         })
         .catch((err) => {
             console.log(err);
-            pool.end();
-            // .then((res)=>{
-            //     console.log(res)
-            // })
-            // .catch((err)=>{
-            //     console.log(err)
-            // });
+            pool.end(() => {});
         });
 }
 
@@ -91,17 +68,11 @@ const dropParcelTable = () => {
     pool.query(queryText)
         .then((res) => {
             console.log(res);
-            pool.end()
-            .catch((err)=>{
-                console.log(err)
-            });
+            pool.end(() => {})
         })
         .catch((err) => {
             console.log(err);
-            pool.end()
-            .catch((err)=>{
-                console.log(err)
-            });
+            pool.end(() => {})
         });
 }
 
@@ -109,18 +80,12 @@ const dropUserTable = () => {
     const queryText = 'DROP TABLE IF EXISTS users '
     pool.query(queryText)
         .then((res) => {
-            console.log(res);
-            pool.end()
-            .catch((err)=>{
-                console.log(err)
-            });
+            console.log(res)
+            pool.end(() => {})
         })
         .catch((err) => {
-            console.log(err);
-            pool.end()
-            .catch((err)=>{
-                console.log(err)
-            });
+            console.log(err)
+            pool.end(() => {})
         });
 }
 
@@ -134,11 +99,6 @@ const dropAllTables = () => {
     dropParcelTable();
     dropUserTable();
 };
-
-// pool.on('remove', ()=>{
-//     console.log('client removed')
-//     process.exit(0);
-// })
 
 module.exports = {
     createParcelTable,
