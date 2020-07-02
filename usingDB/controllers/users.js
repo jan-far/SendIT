@@ -1,6 +1,7 @@
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
-import help from './helper';
+import help from '../config/helper';
+import role from '../config/config';
 import db from "../index";
 
 const User = {
@@ -16,8 +17,8 @@ const User = {
         const hashPassword = help.hashPassword(req.body.password);
 
         const createQuery = `INSERT INTO 
-        users(id, firstname, lastname, email, password, phone, created_date, modified_date)
-        VALUES($1, $2, $3, $4, $5, $6, $7, $8)
+        users(id, firstname, lastname, email, password, phone, role, created_date, modified_date)
+        VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
         returning *`;
 
         const values = [
@@ -27,6 +28,7 @@ const User = {
             req.body.email,
             hashPassword,
             req.body.phone,
+            role.userRoles.user,
             moment(new Date()),
             moment(new Date())
         ];
@@ -60,9 +62,13 @@ const User = {
             if (!help.comparePassword(rows[0].password, req.body.password)) {
                 return res.status(400).send({ 'message': 'The credentials you provided is incorrect, check your password' });
             }
+            console.log(rows[0])
             const token = help.generateToken(rows[0].id);
             
-            return res.status(200).send({ 'messae':'User login successful', 'Token':token });
+            return res.status(200).send({ 
+                'messae':'User login successful',
+                'Profile': rows[0],
+                'Token':token });
         } catch (error) {
             return res.status(400).send(error)
         }
