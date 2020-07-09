@@ -5,15 +5,32 @@ body {
     background: linear-gradient(green, yellow);
 }
 
-.iti__hide {
-    display: none;
-}
-
 .signUp{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-items: center;
+}
+
+.signUp a, p{
+    font-weight: bold;
+    margin-top: 5px;
+    /* background-color: brown; */
+}
+
+.signUp a.backHome::before{
+    content: "\2190";
+    display: inline-block;
+    position: relative;
+    font:  14px/1 FontAwesome;
+    font-size: 15px;
+    line-height: 25px;
+    color: #000;
+    border-right: 1px solid red;
+    margin-right: 5px;
+    padding-right: 5px;
+    text-rendering: auto;
+    transition: all 0.5s ease;
 }
 
 fieldset{
@@ -25,11 +42,6 @@ fieldset{
     width: 80%;
     border: none;
     padding: 20px auto ;
-}
-
-fieldset>a{
-    margin-top: 15px;
-    float: right!important;
 }
 
 .form-field {
