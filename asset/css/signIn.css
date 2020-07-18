@@ -1,5 +1,9 @@
 body{
-    background: radial-gradient(red,yellow, green);
+    background-color: black;
+    background-image: url(../img/delivery.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .signIn{
@@ -14,6 +18,14 @@ body{
     font-size: larger;
     color: blue;
 }
+
+.backHome{
+    background: rgb(90, 90, 197);
+    color: black;
+    padding: 5px;
+    border-radius: 500px;
+}
+
 .signIn a.backHome::before{
     content: "\2190";
     display: inline-block;

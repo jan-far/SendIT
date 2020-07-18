@@ -2,7 +2,9 @@ body {
     margin: 25px;
     font-size: 14px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: linear-gradient(green, yellow);
+    background-size: cover;
+    background-position: bottom;
+    background-image: url(../img/delivery.png);
 }
 
 .signUp{
@@ -16,6 +18,13 @@ body {
     font-weight: bold;
     margin-top: 5px;
     /* background-color: brown; */
+}
+
+.backHome{
+    background: rgb(90, 90, 197);
+    color: black;
+    padding: 5px;
+    border-radius: 500px;
 }
 
 .signUp a.backHome::before{

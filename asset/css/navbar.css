@@ -78,6 +78,10 @@ nav {
     color: rgba(0, 0, 0, 0.8);
 }
 
+.bannerTop{
+    background-image: url(../img/jiffy\ delivery.jpg)!important;
+}
+
 a {
     text-decoration: none;
 }
