@@ -3,6 +3,7 @@ body {
     font-size: 14px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-image: url(../img/delivery.png);
+    background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom;
 }
