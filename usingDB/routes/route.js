@@ -12,7 +12,7 @@ router.put('/parcels/:id', auth.userRole, Parcel.updateParcel);
 router.delete('/parcels/:id/cancel',auth.userRole, Parcel.cancelParcel);
 
 
-router.post('/signup', Users.create);
-router.post('/signin', Users.login);
+router.post('/auth/signup', Users.create);
+router.post('/auth/signin', Users.login);
 
 export default router;
