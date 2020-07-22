@@ -75,4 +75,46 @@ const User = {
     }
 }
 
-export default User;
+const Admin = {
+
+    async create(req, res){
+        if (!req.body.firstname ||!req.body.email || !req.body.password) {
+            return res.status(404).send('Some values are missing!')
+          }
+        if (!help.isValidEmail(req.body.email)) {
+            return res.status(404).send( 'Please enter a valid email address');
+        }
+
+        const hashPassword = help.hashPassword(req.body.password);
+
+        const createQuery = `INSERT INTO 
+        users(id, firstname, lastname, email, password, phone, role, created_date, modified_date)
+        VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
+        returning *`;
+
+        const values = [
+            uuid(),
+            req.body.firstname,
+            req.body.lastname,
+            req.body.email,
+            hashPassword,
+            req.body.phone,
+            role.userRoles.admin,
+            moment(new Date()),
+            moment(new Date())
+        ];
+
+        try{
+            const {rows} = await db.query(createQuery, values);
+            const token = help.generateToken(rows[0].id);
+            return res.status(200).send({'message':'Admin successfully created', 'token':token})
+        } catch(err){
+            if (err.routine === '_bt_chech_unique'){
+                return res.status(400).send({'message': 'User with that EMAIL already exist'})
+            }
+            return res.status(400).send(err);
+        }
+    }
+}
+
+export default { User, Admin };
