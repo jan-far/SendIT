@@ -8,30 +8,32 @@
 </head>
 
 <body>
-        
+    <div class="noti-panel">
+        <!-- <p class="notification"></p> -->
+    </div>
     <div class="signIn">
         <a class="logo" href="../index.html">
             <img class="SendIT-logo" src="../asset/img/connection-world-map-point.jpg" width="100px" alt="SendIT logo">
         </a>
-        <form action="">
+        <form class="form">
             <fieldset>
-                <p style="font-family: Arial, Helvetica, sans-serif; 
-                color:blue;
-                font-size: larger;
-                ">Welcome! Please sign in</p>
+                <div class="form-field">
+                    <p>Welcome! Please SignIn</p>
+                </div>
                 <div class="form-field">
                     <input type="email" id="email" name="email" placeholder="Email" required>
                 </div>
                 <div class="form-field">
-                    <input type="password" name="password" placeholder="Password" required>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
                 </div>
                 <a href="./forgot.html">Forgot Password?</a>
                 <div class="form-field">
-                    <input type="submit" id="submit" value="Sign In">
+                    <input type="submit" id="submit" value="Sign In" >
                 </div>
             </fieldset>
         </form>
-        <p>Don't have an account? create one now! <a href="./signup.html" style="font-weight:bold;">Sign Up</a></p>
+        <p>Don't have an account? <a href="./signup.html">Sign Up</a></p>
+        <a class="backHome" href="../index.html">HomePage</a>
     </div>
     <script src="../asset/js/signin.js"></script>
 </body>

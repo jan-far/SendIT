@@ -6,48 +6,59 @@ class User {
   constructor() {
     this.user = [];
   }
-  
+
   create(data) {
-    const hashed = help.hashPassword(data.password)
+    const hashed = help.hashPassword(data.password);
     const newUser = {
       id: uuid(),
       firstName: data.firstname,
-      lastName: data.lastname ,
+      lastName: data.lastname,
       email: data.email,
-      password: hashed,
       phoneNo: data.phone,
+      password: hashed,
+      location: data.location,
       RegisteredDate: moment.now(),
-      modifiedDate: moment.now()
+      modifiedDate: moment.now(),
     };
     this.user.push(newUser);
-    console.log(newUser)
-    return newUser
+    console.log(newUser);
+    return newUser;
   }
-  
+
   findOne(id) {
-    return this.user.find(reflect => reflect.id === id);
+    return this.user.find((reflect) => reflect.id === id);
   }
-  
+
+  findByEmail(email) {
+    return this.user.find((reflect) => reflect.email === email);
+  }
+
   findAll() {
     return this.user;
   }
-  
+
   update(id, data) {
     const User = this.findOne(id);
     const index = this.user.indexOf(User);
-    this.user[index].email = data['email'] || User.email;
-    this.user[index].weight = data['weight'] || User.weight;
-    this.user[index].destination = data['destination'] || User.destination;
-    this.user[index].phoneNo = data['phoneNo'] || User.phoneNo;
-    this.user[index].modifiedDate = moment.now()
+    this.user[index].email = data.email || User.email;
+    this.user[index].weight = data.weight || User.weight;
+    this.user[index].destination = data.destination || User.destination;
+    this.user[index].phoneNo = data.phoneNo || User.phoneNo;
+    this.user[index].modifiedDate = moment.now();
     return this.user[index];
   }
-  
+
   delete(id) {
     const User = this.findOne(id);
     const index = this.user.indexOf(User);
     this.user.splice(index, 1);
     return {};
+  }
+
+  deleteMany() {
+    const User = this.findAll();
+    const index = this.user.indexOf(User);
+    this.user.splice(index, 1);
   }
 }
 

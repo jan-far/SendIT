@@ -125,8 +125,10 @@ nav {
 .side-dropdown {
     display: none;
     position: fixed;
+    top:0;
+    right: 0;
     padding: 10px;
-    background: white;
+    background: rgb(0, 0, 0, 0.7);
 }
 
 .side-dropdown button,
@@ -295,7 +297,7 @@ button {
     } */
 
     table tbody tr td{
-        overflow: scroll;
+        overflow: auto;
         overflow-wrap: break-word;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;
