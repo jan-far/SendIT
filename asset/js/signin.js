@@ -1,11 +1,12 @@
 const form = document.querySelector('.form');
 const url = 'http://127.0.0.1:3000/api/v1/';
-const token = sessionStorage.getItem('token');
 const notiPanel = document.querySelector('.noti-panel');
 const notification = document.querySelector('.notification');
-// const inputs = document.getElementsByTagName('input');
+const span = document.querySelector('.close');
 
-window.onclick = () => {
+notiPanel.style.display = 'none';
+
+span.onclick = () => {
   notiPanel.style.display = 'none';
 };
 
@@ -30,7 +31,6 @@ form.addEventListener('submit', async (e) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'x-access-token': token,
       },
       body: params,
     });
@@ -39,20 +39,22 @@ form.addEventListener('submit', async (e) => {
     const data = await res;
 
     if (data === undefined || req.status === 400) {
-      // console.log(req.status, req.status === `40 ${new RegExp('[0-9]','gm')}`);
       notiPanel.classList.add('failed');
-      // notiPanel.style.display = 'flex';
       notiPanel.classList.remove('successful');
-      notiPanel.innerHTML = 'Wrong credentials! check and Try again!';
+      notiPanel.style.display = 'flex';
+      notification.innerHTML = `${res.message}`;
     } else {
-      console.log(res);
+      console.log(data);
       notiPanel.classList.add('successful');
       notiPanel.classList.remove('failed');
+      notiPanel.style.display = 'flex';
       notification.innerHTML = `${res.message}`;
-      // window.location.href = '../UI/createParcel.html';
-      return (sessionStorage.setItem('session', JSON.stringify(res)));
+      window.location.href = '../UI/dashboard.html';
+      return (sessionStorage.setItem('_sendit_session_', res.Token));
     }
   } catch (err) {
     console.log(err);
   }
 });
+
+

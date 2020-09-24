@@ -8,10 +8,10 @@ const User = {
 
   async create(req, res) {
     if (!req.body.firstname || !req.body.lastname || !req.body.email || !req.body.password || !req.body.phone) {
-      return res.status(404).send('Some values are missing!');
+      return res.status(404).send({ message: 'Some values are missing!' });
     }
     if (!help.isValidEmail(req.body.email)) {
-      return res.status(404).send('Please enter a valid email address');
+      return res.status(404).send({ message: 'Please enter a valid email address!' });
     }
 
     const hashPassword = help.hashPassword(req.body.password);
@@ -37,21 +37,23 @@ const User = {
     try {
       const { rows } = await db.query(createQuery, values);
       const token = help.generateToken(rows[0].id);
+      [req.session] = rows;
+      console.log(req.session.user);
       return res.status(200).send({ message: 'User successfully created', token });
     } catch (err) {
       if (err.routine === '_bt_check_unique') {
-        return res.status(400).send({ message: 'User with that EMAIL already exist' });
+        return res.status(400).send({ message: 'User with EMAIL already exist' });
       }
       return res.status(400).send(err.detail);
     }
   },
 
-  async login(req, res) {
+  async login(req, res, next) {
     if (!req.body.email || !req.body.password) {
-      return res.status(400).send({ message: 'Some values are missing' });
+      return res.status(404).send({ message: 'Some values are missing!' });
     }
     if (!help.isValidEmail(req.body.email)) {
-      return res.status(400).send({ message: 'Please enter a valid email address' });
+      return res.status(404).send({ message: 'Please enter a valid email address!' });
     }
 
     const text = 'SELECT * FROM users WHERE email = $1';
@@ -63,15 +65,38 @@ const User = {
       if (!help.comparePassword(rows[0].password, req.body.password)) {
         return res.status(400).send({ message: 'The credentials you provided is incorrect, check your password' });
       }
-      console.log(rows[0]);
+      // console.log(rows[0]);
+      const token = help.generateToken(rows[0].id);
+
+      req.authenticated.email = req.body.email;
+      // console.log('auth', req.authenticated);
+
+      res.status(200).send({
+        message: 'User login successful!',
+        Profile: rows[0],
+        Token: token,
+      });
+      next();
+    } catch (error) {
+      return res.status(400).send(error);
+    }
+  },
+
+  async getUser(req, res) {
+    const findOneQuery = 'SELECT * FROM users WHERE id=$1';
+
+    try {
+      const { rows } = await db.query(findOneQuery, [req.user.id]);
+
       const token = help.generateToken(rows[0].id);
 
       return res.status(200).send({
-        message: 'User login successful',
+        message: 'User found successfully!',
         Profile: rows[0],
         Token: token,
       });
     } catch (error) {
+      console.log(error);
       return res.status(400).send(error);
     }
   },

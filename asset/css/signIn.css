@@ -91,6 +91,12 @@ fieldset>a {
 fieldset>p {
     position: relative;
     left: 25%;
+    margin-bottom: 0;
+}
+
+fieldset>p>a:hover {
+    color: red;
+    font-weight: bold;
 }
 
 .form-field {
@@ -123,41 +129,45 @@ fieldset>p {
     transform: scale(1.1);
 }
 
-.failed {
+.notification {
+    position: relative;
     display: flex;
-    /* position: fixed; */
-    flex-direction: column;
-    z-index: 2;
-    bottom: 0;
-    left: 0;
-    border-radius: 0px 10px 10px 0px;
-    background: wheat;
+    width: 100%;
+    text-align: center;
+    margin: 5px;
+}
+
+.close {
+    color: #d6bbbb;
+    float: left;
+    font-size: 28px;
+    font-weight: bold;
+    padding-right: 5px;
+}
+
+.close:hover,
+.close:focus {
     color: red;
-    padding: 0px 2px;
-    overflow: auto;
-    /* height: 100%; */
-    transition: 1s linear;
-    /* background-color: rgb(0, 0, 0, 0.2); */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.failed {
+    border-radius: 10px;
+    background: rgb(231, 212, 176);
+    color: red;
+    transition: .5s linear;
 }
 
 .successful {
-    display: flex;
-    /* position: fixed; */
-    flex-direction: column;
-    z-index: 2;
-    bottom: 0;
-    left: 0;
-    border-radius: 0px 10px 10px 0px;
-    background: wheat;
-    color: green;
-    padding: 0px 2px;
-    overflow: auto;
-    /* height: 100%; */
-    transition: 1s linear;;
+    border-radius: 10px;
+    background: green;
+    color: rgb(240, 236, 228);
+    transition: .5s linear;
 }
 
 @media screen and (max-width: 968px) {
-    *{
+    * {
         box-sizing: border-box;
         overflow: hidden;
         outline: none;
@@ -166,7 +176,7 @@ fieldset>p {
     body {
         background-image: unset;
         background: radial-gradient(yellow, yellowgreen, green, rgb(0, 0, 0));
-        animation: actives .5s linear;
+        /* animation: actives .5s linear; */
         background-repeat: unset;
         background-size: unset;
     }
@@ -206,9 +216,8 @@ fieldset>p {
         font: 1em sans-serif;
     }
 
-    .signIn>p>a:hover {
-        color: red;
-        font-weight: bold;
+    .signIn>p {
+        font-size: small;
     }
 
     .logo {

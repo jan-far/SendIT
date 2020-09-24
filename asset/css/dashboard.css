@@ -5,10 +5,11 @@
 }
 
 body {
-    background: #E5E5E5;
+    /* background: grey; */
 }
 
 header {
+    /* display: none; */
     background: #FFFFFF;
     position: fixed;
     top: 0;
@@ -21,7 +22,7 @@ nav {
     display: grid;
     grid-template-columns: .8fr .3fr;
     padding: 15px 20px 15px 20px;
-    background-color: #333;
+    background: linear-gradient(darkviolet, purple);
     align-items: center;
 }
 
@@ -161,83 +162,22 @@ nav {
     margin-top: 0px;
 }
 
-.container {
-    display: flex;
-    width: inherit;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-}
-
-.parcel-delivery {
-    display: flex;
-    margin-top: 6em;
-}
-
-.order-form {
-    padding-right: 20px;
-}
-
-.form-title {
-    font-weight: bolder;
-    text-align: center;
-    margin-bottom: 5px;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    border: black solid;
-    justify-content: center;
-    align-content: center;
-}
-
-.form-field {
-    padding: 10px 30px;
-}
-
-.form-field input {
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-}
-
-#submit {
-    align-content: center;
-    align-self: center;
-    justify-self: center;
-    border-radius: 5px;
-    text-align: center;
-    align-self: center;
+main{
+    margin-top: 15%;
+    width: 100%;
 }
 
 table {
-    border-collapse: collapse;
-    border-color: grey;
-    text-align: center;
-}
+    border-collapse:  collapse;
 
-th {
-    background-color: black;
-    color: white;
-    text-align: center;
-    width: 10em;
 }
-
-button {
-    color: black;
-    border-radius: 5px;
-    background-color: lightgrey;
-    cursor: pointer;
-    border: 1px solid;
-    padding: 5px;
-}
-
 
 @media(min-width:993px) {
     nav {
         grid-template-columns: .9fr .3fr auto;
+        /* z-index: 10001; */
     }
+    
 }
 
 @media(max-width:992px) {
@@ -248,11 +188,9 @@ button {
 
 @media(max-width:780px) {
     nav {
-        /* width: 100%; */
         grid-template-columns: .2fr 0.9fr;
-        padding: 15px;
+        padding: 5px;
         align-items: center;
-        /* display: none; */
         text-align: center;
     }
 
@@ -274,28 +212,14 @@ button {
         margin-right: 20px;
     }
 
-    .container {
-        margin-top: 20px;
+    .my-order {
+        width: 100%;
+        /* overflow-x: scroll; */
     }
 
-    .parcel-delivery {
-        /* align-content: center; */
-        flex-direction: column;
-        margin-top: 60px;
+    table {
+        /* width: 120%; */
     }
-
-    .order-form {
-        display: flex;
-        flex-direction: column;
-        border: black solid;
-        justify-content: center;
-        align-content: center;
-    }
-
-    /* #parcelTable{
-        display: flex;
-        flex-direction: column;
-    } */
 
     table tbody tr td{
         overflow: auto;
@@ -308,5 +232,10 @@ button {
 @media(min-width:1200px) {
     nav {
         grid-template-columns: .7fr .9fr auto;
+        /* display: inline; */
     }
+    .navbar {
+        display: inline!important;
+    }
+
 }

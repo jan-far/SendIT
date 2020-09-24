@@ -1,8 +1,11 @@
 import express from 'express';
 import path from 'path';
+import session from 'client-sessions';
 import '@babel/polyfill';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import { userSession } from './usingDB/middleware';
+
 import usingJSOnject from './usingJSObject/routes';
 import usingDB from './usingDB/routes';
 
@@ -12,9 +15,34 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join('.')));
-app.use('/UI', express.static(path.join(__dirname, '/UI/')));
+app.use('/', express.static(path.join(__dirname, '.')));
+app.use(express.static('UI'));
 app.use('/asset', express.static(path.join(__dirname, 'asset')));
+
+app.use(session({
+  cookieName: 'authenticated',
+  secret: 'thisisjustsomethingrandom',
+  duration: 60 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+  cookie: {
+    // httpOnly: false,
+    // secure: false,
+  },
+}));
+
+// app.use((req, res, next) => {
+//   if (req.authenticated) {
+//     res.setHeader('X-Seen-You', 'true');
+//     next()
+//   } else {
+//     // setting a property will automatically cause a Set-Cookie response
+//     // to be sent
+//     req.authenticated = true;
+//     res.setHeader('X-authenticated', 'false');
+//     next()
+//   }
+// });
+// app.use(userSession);
 
 const ref = process.env.TYPE === 'db' ? usingDB : usingJSOnject;
 
