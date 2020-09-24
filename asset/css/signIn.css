@@ -176,7 +176,7 @@ fieldset>p>a:hover {
     body {
         background-image: unset;
         background: radial-gradient(yellow, yellowgreen, green, rgb(0, 0, 0));
-        /* animation: actives .5s linear; */
+        animation: actives .4s linear;
         background-repeat: unset;
         background-size: unset;
     }
