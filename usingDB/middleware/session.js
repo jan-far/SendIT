@@ -10,7 +10,7 @@ export default async function getauthenticated(req, res, next) {
       //   req.authenticated.reset();
       //   res.redirect('/auth/signin');
       //   console.log(rows);
-      // } else 
+      // } else
       if (!rows === []) {
         console.log('user', req.authenticated.user);
         [req.user] = rows;

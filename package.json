@@ -5,6 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --require @babel/polyfill --require @babel/register --exit",
+    "lint": "eslint usingDB --fix",
+    "clean": "rimraf build && mkdir build",
+    "build-babel": "babel usingDB -d build/usingDB && babel usingJSObject -d build/usingJSObject && babel server.js -d build",
+    "build": "npm run clean && npm run build-babel",
     "start": "babel-node server.js"
   },
   "keywords": [],
@@ -37,12 +41,13 @@
     "uuid": "^8.3.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4",
     "chalk": "^4.1.0",
     "debug": "^4.2.0",
     "eslint": "^7.9.0",
     "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.0"
+    "eslint-plugin-import": "^2.22.0",
+    "nodemon": "^2.0.4",
+    "rimraf": "^3.0.2"
   },
   "engines": {
     "node": "10"

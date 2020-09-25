@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import Parcel from '../controllers/parcels';
-import {auth, validator} from '../middleware';
+import { auth, validator } from '../middleware';
 
 const router = Router();
 
