@@ -133,7 +133,10 @@ const Parcel = {
         req.params.id,
       ];
       const response = await db.query(updateOneQuery, values);
-      return res.status(200).send(response.rows[0]);
+      return res.status(200).send({
+        Update: response.rows[0],
+        message: 'Updated successfully',
+      });
     } catch (err) {
       return res.status(400).send({
         err,
@@ -149,7 +152,7 @@ const Parcel = {
       if (!rows[0]) {
         return res.status(404).send({ message: 'parcel not found' });
       }
-      return res.status(200).send({ message: 'deleted' });
+      return res.status(200).send({ message: 'Parcel delivery canceled successfully' });
     } catch (err) {
       return res.status(400).send({
         err,

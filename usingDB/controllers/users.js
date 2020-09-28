@@ -68,16 +68,17 @@ const User = {
       // console.log(rows[0]);
       const token = help.generateToken(rows[0].id);
 
-      req.authenticated.email = req.body.email;
+      [req.authenticated] = rows;
+      req.authenticated.token = token;
       // console.log('auth', req.authenticated);
 
       res.status(200).send({
         message: 'User login successful!',
         Profile: rows[0],
-        Token: token,
       });
       next();
     } catch (error) {
+      console.log(error);
       return res.status(400).send(error);
     }
   },

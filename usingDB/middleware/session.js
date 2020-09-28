@@ -1,31 +1,27 @@
 import db from '../index';
 
-export default async function getauthenticated(req, res, next) {
+export default async function getauthenticated(req, res) {
   if (req.authenticated) {
-    const findOneQuery = 'SELECT * FROM parcels WHERE email=$1';
-    console.log(req.authenticated);
+    const findOneQuery = 'SELECT * FROM users WHERE email=$1';
     try {
-      const { rows } = await db.query(findOneQuery, [req.authenticated.id]);
-      // if (rows === [] || !rows) {
-      //   req.authenticated.reset();
-      //   res.redirect('/auth/signin');
-      //   console.log(rows);
-      // } else
-      if (!rows === []) {
-        console.log('user', req.authenticated.user);
+      const { rows } = await db.query(findOneQuery, [req.authenticated.email]);
+      if (rows !== []) {
         [req.user] = rows;
         delete req.user.password; // delete the password from the authenticated
-        [req.authenticated.user] = rows; // refresh the authenticated value
+        [req.authenticated] = rows; // refresh the authenticated value
+        console.log('user', req.authenticated);
 
         // finishing processing the middleware and run the route
-        next();
-      } next();
+        return next();
+      }
+      // console.log('okay!', req.authenticated);
+      return next();
     } catch (err) {
       console.log(err);
-      next();
+      return next();
     }
   } else {
     console.log('unset');
-    next();
+    res.redirect('/UI/redirect.html')
   }
 }

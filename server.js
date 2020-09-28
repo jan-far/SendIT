@@ -15,34 +15,20 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use('/', express.static(path.join(__dirname, '.')));
-app.use(express.static('UI'));
-app.use('/asset', express.static(path.join(__dirname, 'asset')));
+// app.use('/', express.static(path.join(__dirname, '.')));
+app.use(express.static('src'));
+// app.use('/asset', express.static(path.join(__dirname, 'asset')));
 
 app.use(session({
   cookieName: 'authenticated',
   secret: 'thisisjustsomethingrandom',
-  duration: 60 * 60 * 1000,
+  duration: 2 * 60 * 60 * 1000,
   activeDuration: 5 * 60 * 1000,
   cookie: {
-    // httpOnly: false,
-    // secure: false,
+    httpOnly: true,
+    // secure: true,
   },
 }));
-
-// app.use((req, res, next) => {
-//   if (req.authenticated) {
-//     res.setHeader('X-Seen-You', 'true');
-//     next()
-//   } else {
-//     // setting a property will automatically cause a Set-Cookie response
-//     // to be sent
-//     req.authenticated = true;
-//     res.setHeader('X-authenticated', 'false');
-//     next()
-//   }
-// });
-// app.use(userSession);
 
 const ref = process.env.TYPE === 'db' ? usingDB : usingJSOnject;
 
@@ -61,7 +47,6 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  // `Server is running on port ${PORT}.`;
   console.log(`Server is running on port ${PORT}.`);
 });
 
