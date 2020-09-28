@@ -193,6 +193,22 @@ article{
     z-index: -1;
 }
 
+aside {
+    width: max-content;
+}
+
+details{
+    display: flex;
+    width: 100%;
+    background-color: tomato;
+    padding: 5px;
+}
+
+summary {
+    width: 220px;
+    margin-bottom: 5px;
+}
+
 table {
     border-collapse:  collapse;
 
