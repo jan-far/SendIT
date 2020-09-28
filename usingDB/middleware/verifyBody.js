@@ -44,7 +44,7 @@ const ValidateRegisterBody = {
 
       req.body.email = req.body.email.toLowerCase();
 
-      next();
+      return next();
     } catch (error) {
       res.status(error.c || 500).json({
         statusCode: error.c || 500,

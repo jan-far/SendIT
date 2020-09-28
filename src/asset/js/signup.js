@@ -1,13 +1,15 @@
+import API from './host.js';
+
 const input = document.querySelector('#phone');
 const IntNumber = window.intlTelInput(input, {
-  utilsScript: '/asset/js/utils.js',
+  utilsScript: '../asset/js/utils.js',
 });
 
 window.intlTelInput(input, {
   preferredCountries: ['ng'],
 });
 
-const url = 'http://127.0.0.1:3000/api/v1/';
+const url = API.getHostUrl();
 const form = document.querySelector('.form');
 const modelText = document.querySelector('.model-text');
 const modal = document.querySelector('.modal');
@@ -56,6 +58,7 @@ form.addEventListener('submit', async (e) => {
       modelText.innerHTML = `${data.message}`;
       modal.style.display = 'flex';
       modelText.style.transition = '2s linear';
+      return;
     }
   } catch (err) {
     console.log(err);
