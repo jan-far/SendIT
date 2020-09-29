@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use('/', express.static(path.join(__dirname, '.')));
-app.use(express.static('src'));
+// app.use(express.static('src'));
 // app.use('/asset', express.static(path.join(__dirname, 'asset')));
 
 app.use(session({
