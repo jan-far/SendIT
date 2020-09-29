@@ -40,7 +40,8 @@ app.get('/test', (req, res) => {
 
 // simple route
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/index.html'));
+  // res.sendFile(path.join(__dirname, '/index.html'));
+  res.status(200).send({'Welcome to SENDIT by Jan-far'})
 });
 
 // set port, listen for requests
