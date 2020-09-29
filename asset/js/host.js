@@ -1,10 +1,10 @@
 function getHostUrl() {
   if (window.location.host.indexOf('127.0.0.1') === 0) {
-    console.log('localhost', window.location.host);
+    // console.log('localhost', window.location.host);
     return 'http://127.0.0.1:3000/api/v1/';
   }
-  console.log('remote host', window.location.host);
-  return '/api/v1/';
+  // console.log('remote host', window.location.host);
+  return 'https://sendit-postgres.herokuapp.com/api/v1/';
 }
 
 function setCookie(cname, cvalue, exdays) {

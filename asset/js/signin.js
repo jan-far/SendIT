@@ -49,7 +49,7 @@ form.addEventListener('submit', async (e) => {
       notiPanel.style.display = 'flex';
       notification.innerHTML = `${res.message}`;
     } else {
-      console.log(data);
+      // console.log(data);
       notiPanel.classList.add('successful');
       notiPanel.classList.remove('failed');
       notiPanel.style.display = 'flex';

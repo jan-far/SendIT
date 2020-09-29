@@ -76,7 +76,7 @@ window.onload = async () => {
     if (!result) {
       console.log('error occured');
     } else if (data.rows === [] || data.rowCount === 0) {
-      console.log('an empty data');
+      // console.log('an empty data');
       pBody.innerHTML = 'NO PARCEL ORDER HAS BEEN MADE! ';
     } else {
       for (let i = 0; i < data.rowCount; i += 1) {

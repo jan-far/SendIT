@@ -4,8 +4,7 @@ function getHostUrl() {
   if (window.location.host.indexOf('localhost')) {
     return 'http://127.0.0.1:3000/api/v1/';
   }
-  console.log('remote host');
-  return '/api/v1/';
+  return 'https://sendit-postgres.herokuapp.com/api/v1/';
 }
 
 function getCookie(cname) {
@@ -142,7 +141,7 @@ async function deleteParcel(td) {
   row = td.parentElement.parentElement;
 
   const c = row.cells[0].innerHTML;
-  console.log(c, currentParcel);
+  // console.log(c, currentParcel);
   try {
     const res = await fetch(`${url}parcels/${currentParcel[c - 1]}/cancel`, {
       headers: {
@@ -154,7 +153,7 @@ async function deleteParcel(td) {
     const result = await res.json();
     const data = await result;
 
-    console.log(data);
+    // console.log(data);
   } catch (err) {
     console.log(err);
   }

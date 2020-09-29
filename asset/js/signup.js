@@ -61,7 +61,7 @@ form.addEventListener('submit', async (e) => {
       return;
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     modelText.innerHTML = 'Error when registering! Try again...';
     modal.style.display = 'flex';
     modelText.style.transition = '2s linear';

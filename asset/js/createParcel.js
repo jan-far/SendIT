@@ -69,7 +69,6 @@ window.addEventListener('load', async () => {
         // console.log(data.rows[i]);
         parcels[i] = data.rows[i].id;
         cell0.innerHTML = i + 1;
-        console.log(cell0.innerHTML);
       }
       API.setCookie('parcels', JSON.stringify(parcels), 1);
     }
@@ -141,7 +140,7 @@ async function updateParcel() {
     const result = await res.json();
 
     if (result) {
-      console.log(result.message);
+      // console.log(result.message);
     }
   } catch (err) {
     console.log(err);
