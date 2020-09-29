@@ -204,7 +204,7 @@ a {
     nav {
         width: 100%;
         grid-template-columns: .1fr 1fr;
-        padding: 15px;
+        padding: 5px;
         align-items: center;
         text-align: center;
     }

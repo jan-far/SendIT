@@ -1,138 +1,196 @@
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-const sidenav = document.querySelector('.side-dropdown');
+import API from './host.js';
 
-const toggler = (x) => {
-  x.classList.toggle("change");
-  sidenav.classList.toggle('show')
+const url = API.getHostUrl();
+const token = API.getCookie('session_');
+const form = document.querySelector('form');
+const submit = document.querySelector('#submit');
+// const edit = document.querySelector('.edit');
+const parcels = {};
+let cell0;
+let formData;
+let search;
+let row;
+
+API.autoRedirect();
+
+function insertnewRow(data) {
+  const table = document.getElementById('parcelTable').getElementsByTagName('tbody')[0];
+  const newRow = table.insertRow(table.length);
+
+  cell0 = newRow.insertCell(0);
+  // console.log(cell0)
+  // sessionStorage.setItem('cell0', cell0.innerHTML)
+
+  const cell1 = newRow.insertCell(1);
+  cell1.innerHTML = data.email;
+
+  const cell2 = newRow.insertCell(2);
+  cell2.innerHTML = data.weight;
+
+  const cell3 = newRow.insertCell(3);
+  cell3.innerHTML = data.destination;
+
+  const cell4 = newRow.insertCell(4);
+  cell4.innerHTML = data.location;
+
+  const cell5 = newRow.insertCell(5);
+  cell5.innerHTML = data.phone;
+
+  const cell6 = newRow.insertCell(6);
+  cell6.innerHTML = data.weight * 2;
+
+  const cell7 = newRow.insertCell(7);
+  cell7.innerHTML = '<button class="edit" onclick="Edit(this)">Edit</button>';
+
+  const cell8 = newRow.insertCell(8);
+  cell8.innerHTML = '<button onclick="Delete(this)" >Cancel Order</button>';
 }
 
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
+window.addEventListener('load', async () => {
+  try {
+    const res = await fetch(`${url}parcels`, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'x-access-token': `${token}`,
+      },
+      method: 'GET',
+    });
+    const result = await res.json();
+    const data = result;
 
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function (event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
+    if (!result) {
+      console.log('error occured');
+    } else if (data.rows === [] || data.rowCount === 0) {
+      console.log('an empty data');
+      // pBody.innerHTML = 'NO PARCEL ORDER HAS BEEN MADE! ';
+    } else {
+      for (let i = 0; i < data.rowCount; i++) {
+        insertnewRow(data.rows[i]);
+        // console.log(data.rows[i]);
+        parcels[i] = data.rows[i].id;
+        cell0.innerHTML = i + 1;
+        console.log(cell0.innerHTML);
       }
+      API.setCookie('parcels', JSON.stringify(parcels), 1);
     }
+  } catch (err) {
+    console.log(err);
   }
-}
+  // function onFormSubmit() {
+  //   if (submit.value == null)
+  //     insertnewRow(formData)
+  //   else
+  //     Update(formData);
 
-var selectedRow = null;
+  //   resetForm();
+  // }
+});
 
-function onFormSubmit(){
-  var data = readFromData();
-  if (selectedRow == null)
-      insertNewOrder(data)
-      else
-      Update(data);
-  
-  resetForm();
-}
-
-function readFromData() {
-  var formData = {};
-  var email = document.querySelector('#email').value;
-  var weight = document.querySelector('#weight').value;
-  var destination = document.querySelector('#destination').value;
-  var pickup = document.querySelector('#pickup').value;
-  var phoneNo = document.querySelector('#phoneNo').value;
+function readFormData() {
+  let formData = {};
+  const email = document.querySelector('#email').value;
+  const destination = document.querySelector('#destination').value;
+  const weight = document.querySelector('#weight').value;
+  const phone = document.querySelector('#phoneNo').value;
+  const pick = document.querySelector('#pickup').value;
 
   formData = {
-    Email: email,
-    Weight: weight,
-    Destination: destination,
-    Pickup: pickup,
-    PhoneNo: phoneNo
+    email,
+    destination,
+    weight,
+    phone,
+    pick,
   };
   return formData;
 }
 
-function insertNewOrder(data) {
-  var table = document.getElementById('parcelTable').getElementsByTagName('tbody')[0];
-  var newOrder = table.insertRow(table.length);
-
-  cell1 = newOrder.insertCell(0);
-  cell1.innerHTML = data.Email;
-
-  cell2 = newOrder.insertCell(1);
-  cell2.innerHTML = data.Weight;
-
-  cell3 = newOrder.insertCell(2);
-  cell3.innerHTML = data.Destination;
-
-  cell4 = newOrder.insertCell(3);
-  cell4.innerHTML = data.Pickup;
-
-  cell5 = newOrder.insertCell(4);
-  cell5.innerHTML = data.PhoneNo
-
-  cell6 = newOrder.insertCell(5);
-  cell6.innerHTML = Price()
-
-  cell7 = newOrder.insertCell(6);
-  cell7.innerHTML = `<button onclick="Edit(this)">Edit</button>`;
-
-  cell8 = newOrder.insertCell(7);
-  cell8.innerHTML = `<button onclick="Delete(this)">Cancel Order</button>`;
-}
-
-function Price() {
-  var weight = document.querySelector('#weight').value;
-  if (weight) {
-    var price = weight * 20;
-    return price;
-  }
-  // else{
-  //   if(weight =='') {
-  //       do{
-  //       var user = prompt("Enter a valid Weigth value");
-  //       return user;
-  //     }while (weight =='')
-  //   }
-
-  //   else if (weight !=Number){
-  //       do{
-  //       var user = prompt("Weight value must be number");
-  //       return user;
-  //     }while(weight != Number);
-  //   }
-  //   else {
-  //     return weight * user
-  //   }
-  // }  
-}
-
-function resetForm(){
+function resetForm() {
   document.querySelector('#email').value = '';
-  document.querySelector('#weight').value ='';
+  document.querySelector('#weight').value = '';
   document.querySelector('#destination').value = '';
   document.querySelector('#pickup').value = '';
   document.querySelector('#phoneNo').value = '';
-  document.querySelector("#submit").value = "Create Oder";
-  selectedRow = null;
+  document.querySelector('#submit').value = 'Create Order';
+  // selectedRow = null;
 }
 
-function Edit(td){
-  selectedRow = td.parentElement.parentElement;
+async function updateParcel() {
+  const currentParcel = JSON.parse(API.getCookie('parcels'));
+  row = sessionStorage.getItem('selected');
 
-  document.querySelector('#email').value = selectedRow.cells[0].innerHTML;
-  document.querySelector('#weight').value =selectedRow.cells[1].innerHTML;
-  document.getElementById('destination').value = selectedRow.cells[2].innerHTML;
-  document.querySelector('#pickup').value = selectedRow.cells[3].innerHTML;
-  document.querySelector('#phoneNo').value = selectedRow.cells[4].innerHTML;
+  const c = row;
+  console.log(c, row);
 
-  document.querySelector("#submit").value  = "Update Destination";
+  formData = new FormData(form);
+  search = new URLSearchParams();
+
+  for (const pair of formData) {
+    search.append(pair[0], pair[1]);
+    // console.log(pair[0], pair[1]);
+  }
+
+  try {
+    const res = await fetch(`${url}parcels/${currentParcel[c - 1]}/destination`, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'x-access-token': `${token}`,
+      },
+      method: 'PUT',
+      body: search,
+    });
+    const result = await res.json();
+
+    if (result) {
+      console.log(result.message);
+    }
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-function Update(data){
-  selectedRow.cells[2].innerHTML = data.Destination;
-  resetForm()
-}
+form.addEventListener('submit', async () => {
+  if (submit.value !== 'Update Destination') {
+    insertnewRow(readFormData());
+    console.log(cell0);
+
+    formData = new FormData(form);
+    search = new URLSearchParams();
+
+    for (const pair of formData) {
+      search.append(pair[0], pair[1]);
+      // console.log(pair[0], pair[1]);
+    }
+
+    try {
+      const signup = await fetch(`${url}parcels`, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'x-access-token': token,
+        },
+        method: 'POST',
+        body: search,
+      });
+      const res = await signup.json();
+      const data = await res;
+      resetForm();
+
+      if (!res) {
+        console.log('error occured');
+      } else if (data.rows === [] || data.rowCount === 0) {
+        console.log('an empty data');
+        // pBody.innerHTML = 'NO PARCEL ORDER HAS BEEN MADE! ';
+      } else {
+        for (let i = 0; i < data.rowCount; i++) {
+          insertnewRow(data.rows[i]);
+        }
+        return;
+      }
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
+  updateParcel();
+  resetForm();
+});

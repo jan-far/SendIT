@@ -3,20 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../asset/css/intlTelInput.css">
-    <link rel="stylesheet" href="../asset/css/signup.css">
+    <link rel="stylesheet" type="text/css" href="../asset/css/signup.css">
+    <link rel="stylesheet" type="text/css" href="../asset/css/intlTelInput.css">
+    <link rel="stylesheet" href="../asset/css/pop.css">
     <title>Join Us</title>
 </head>
 
 <body>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p class="model-text"></p>
+        </div>
+
+    </div>
     <div class="signUp-form">
         <div class="signup">
-            <form action="">
+            <form name="myForm" class="form">
                 <fieldset>
-                    <p style="font-family: Arial, Helvetica, sans-serif; 
-                    color:blue;
-                    font-size: larger;
-                    ">Sign Up!</p>
+                    <div class="form-field">
+                        <p class="signTitle">Sign Up!</p>
+                    </div>
                     <div class="form-field">
                         <input type="text" name="firstname" id="firstname" placeholder="First name" required>
                     </div>
@@ -27,29 +36,29 @@
                         <input type="email" id="email" name="email" placeholder="Email" required>
                     </div>
                     <div class="form-field">
-                        <input type="tel" name="phone" id="phone" placeholder="Phone Number" required>
+                        <input type="tel" name="phone" id="phone" placeholder="Phone Number" maxlength="16" required >
                     </div>
                     <div class="form-field">
-                        <input type="password" name="password" placeholder="Password" required>
+                        <input type="password" name="password" id="pass1" placeholder="Password" required>
                     </div>
                     <div class="form-field">
-                        <input type="password" name="password" placeholder="Repeat Password" required>
+                        <input type="password" name="confirm password" id="pass2" placeholder="Repeat Password" required>
                     </div>
                     <div class="form-field">
-                        <input type="text" name="pickup" id="pickup" placeholder="My default pickup location">
+                        <input type="text" name="location" id="pickup" placeholder="Your location" required minlength="3">
                     </div>
                     <div class="form-field">
                         <input type="submit" id="submit" value="Create Account">
                     </div>
                 </fieldset>
-               
+
             </form>
             <p>Already have an account? <a href="./signIn.html">Login</a></p>
-            <a class="backHome" href="../index.html">HomePage</a>
+            <a class="backHome" href="./home.html">HomePage</a>
         </div>
     </div>
-    <script src="../../asset/js/intlTelInput.js"></script>
-    <script src="../../asset/js/signup.js"></script>
+    <script  src="../asset/js/intlTelInput.js"></script>
+    <script type="module" src="../asset/js/signup.js"></script>
 </body>
 
 </html>

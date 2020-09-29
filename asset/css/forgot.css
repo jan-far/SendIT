@@ -5,7 +5,7 @@ body {
     background-color: greenyellow;
 }
 
-.forgot{
+.forgot {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,7 +13,7 @@ body {
     margin-top: 10%;
 }
 
-fieldset{
+fieldset {
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -22,12 +22,12 @@ fieldset{
     border-radius: 10px;
     width: 80%;
     border: none;
-    padding: 20px auto ;
+    padding: 20px auto;
 }
 
-fieldset>p>a{
+fieldset>p>a {
     margin-top: 15px;
-    float: right!important;
+    float: right !important;
     font-weight: bold;
 }
 
@@ -36,37 +36,44 @@ fieldset>p>a{
     align-content: center;
 }
 
-div.form-field p{
+.resetTitle {
+    font-size: x-large;
+    color: green!important;
+}
+
+div.form-field p {
     font-weight: bold;
     text-align: center;
     color: grey;
 }
 
-.form-field input{
-    border: 1px solid #CCC!important;
+.form-field input {
+    border: 1px solid #CCC !important;
     border-radius: 2px;
     padding: 10px;
     width: 350px;
     font: 1em sans-serif;
 }
 
-.form-field input:invalid{
+.form-field input:invalid {
     background-color: rgb(106, 194, 34);
 }
-.form-field input:valid{
+
+.form-field input:valid {
     background-color: lightgreen;
 }
-.form-field input::placeholder{
+
+.form-field input::placeholder {
     color: black;
 }
 
-#submit{
+#submit {
     text-align: center;
     border-radius: 10px;
     padding: 10px 25px;
     margin-top: 15px;
     color: #FFF;
-    width: initial!important;
+    width: initial !important;
     background-color: green;
     background: linear-gradient(yellow, green);
 }
@@ -75,19 +82,19 @@ div.form-field p{
     cursor: pointer;
 }
 
-@media screen and (max-width: 768px){
-    .forgot{
+@media screen and (max-width: 768px) {
+    .forgot {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-    
-    .logo{
+
+    .logo {
         margin: 10% 0 auto;
         padding-bottom: 20px;
     }
-    
-    fieldset{
+
+    fieldset {
         background-color: white;
         display: flex;
         flex-direction: column;
@@ -97,16 +104,16 @@ div.form-field p{
         border: none;
         padding: 20px;
     }
-    
+
     .form-field {
         padding: 10px 20px;
         align-content: center;
     }
-    
-    #submit{
+
+    #submit {
         text-align: center;
         border-radius: 10px;
         padding: 5px 25px;
-        width: initial!important;
+        width: initial !important;
     }
 }
