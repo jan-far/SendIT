@@ -1,11 +1,15 @@
 const userRoles = {
-    user: 1,
-    admin: 2
+  user: 1,
+  admin: 2,
 };
 
 const accessLevels = {
-    user: userRoles.user || userRoles.admin,
-    admin: userRoles.admin,
+  user: userRoles.user || userRoles.admin,
+  admin: userRoles.admin,
 };
 
-export default { accessLevels, userRoles };
+const status = {
+  default: 'Processing',
+};
+
+export default { accessLevels, userRoles, status };

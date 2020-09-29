@@ -1,0 +1,64 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../asset/css/signup.css">
+    <link rel="stylesheet" type="text/css" href="../asset/css/intlTelInput.css">
+    <link rel="stylesheet" href="../asset/css/pop.css">
+    <title>Join Us</title>
+</head>
+
+<body>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p class="model-text"></p>
+        </div>
+
+    </div>
+    <div class="signUp-form">
+        <div class="signup">
+            <form name="myForm" class="form">
+                <fieldset>
+                    <div class="form-field">
+                        <p class="signTitle">Sign Up!</p>
+                    </div>
+                    <div class="form-field">
+                        <input type="text" name="firstname" id="firstname" placeholder="First name" required>
+                    </div>
+                    <div class="form-field">
+                        <input type="text" name="lastname" id="lastname" placeholder="Last name" required>
+                    </div>
+                    <div class="form-field">
+                        <input type="email" id="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-field">
+                        <input type="tel" name="phone" id="phone" placeholder="Phone Number" maxlength="16" required >
+                    </div>
+                    <div class="form-field">
+                        <input type="password" name="password" id="pass1" placeholder="Password" required>
+                    </div>
+                    <div class="form-field">
+                        <input type="password" name="confirm password" id="pass2" placeholder="Repeat Password" required>
+                    </div>
+                    <div class="form-field">
+                        <input type="text" name="location" id="pickup" placeholder="Your location" required minlength="3">
+                    </div>
+                    <div class="form-field">
+                        <input type="submit" id="submit" value="Create Account">
+                    </div>
+                </fieldset>
+
+            </form>
+            <p>Already have an account? <a href="./signIn.html">Login</a></p>
+            <a class="backHome" href="./home.html">HomePage</a>
+        </div>
+    </div>
+    <script  src="../asset/js/intlTelInput.js"></script>
+    <script type="module" src="../asset/js/signup.js"></script>
+</body>
+
+</html>

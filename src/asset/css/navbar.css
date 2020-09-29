@@ -1,0 +1,260 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #E5E5E5;
+}
+
+header {
+    background: #FFFFFF;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+nav {
+    display: grid;
+    grid-template-columns: .7fr .9fr .2fr;
+    padding: 20px 25px 20px 20px;
+    align-items: center;
+}
+
+.navbar-nav {
+    justify-self: right;
+    margin: 0 !important;
+}
+
+.navbar-nav>.nav-item {
+    float: left;
+    list-style-type: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 0 20px;
+    font-weight: 600;
+    letter-spacing: .04em;
+}
+
+.nav-item[aria-current]:after {
+    content: "\23CF";
+    display: block;
+    opacity: 1;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nav-item>.nav-link {
+    color: rgba(43, 42, 42, 1);
+}
+
+.nav-item:hover:after {
+    content: "\23CF";
+    display: block;
+    opacity: 1;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nav-item::after {
+    content: "\23CF";
+    opacity: 0;
+    color: #EB392E;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 5px;
+    height: 5px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color:red;
+}
+
+.nav-link:visited {
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.bannerTop{
+    background-image: url(../img/jiffy\ delivery.jpg)!important;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn {
+    color: white;
+    max-width: 120px;
+    padding: 15px;
+    background: green;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: 500;
+    text-align: center
+}
+.btn:hover {
+    color: #EB392E;
+    background-color: transparent;
+    border: 1px solid rgb(235, 57, 46);
+    font-weight: 500;
+}
+
+.img-responsive {
+    width: auto;
+    height: 3em;
+}
+
+.bar-container {
+    display: none;
+}
+
+.bar1,
+.bar2,
+.bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {
+    opacity: 0;
+}
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.sidemenu {
+    position: fixed;
+    width: 200px;
+    padding: 10px;
+    top: 0;
+    z-index: 100;
+    padding-top: 100px;
+    background: white;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    transform-origin: 0% 0%;
+    transform: translate(-100%, 0);
+    min-height: 100vh;
+}
+
+.sidemenu li {
+    padding: 15px 0;
+    font-size: 20px;
+}
+
+.sidemenu li button, .btn{
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    border: 1px solid;
+    font-weight: 500;
+    background: green;
+    color: white;
+}
+
+.sidemenu li button:hover, .btn:hover{
+    cursor: pointer;
+}
+
+.sidemenu li:last-child {
+    margin-top: 10px;
+}
+
+.active {
+    text-align: center;
+    transform-origin: 0% 0%;
+    transform: unset;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+    min-height: 100vh;
+}
+
+@media(min-width:993px) {
+    nav {
+        grid-template-columns: .2fr .9fr auto;
+    }
+    .active {
+        transform: translate(-100%, 0);
+        transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+    }
+}
+
+@media(max-width:992px) {
+    nav {
+        grid-template-columns: .1fr 1fr .2fr;
+    }
+}
+
+@media(max-width:780px) {
+    nav {
+        width: 100%;
+        grid-template-columns: .1fr 1fr;
+        padding: 5px;
+        align-items: center;
+        text-align: center;
+    }
+    .navbar-nav {
+        display: none;
+    }
+    .btn-header {
+        display: none;
+    }
+    .bar-container {
+        display: inline-block;
+        cursor: pointer;
+        justify-self: right;
+    }
+}
+
+.banner {
+    width: 100%;
+    background-image: linear-gradient(0deg, rgb(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../images/01-HomePage/001-headerImage/headerImage-01.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 95vh;
+}
+
+.banner>div {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    color: white;
+}
+
+.text-white {
+    color: white;
+}
+
+.heading-1 {
+    height: 70px;
+    font-weight: bold;
+    font-size: 85px;
+    line-height: 90.69%;
+    margin-bottom: 30px;
+}
+
+.mb-5 {
+    margin-bottom: 3em;
+}
+
+@media(min-width:1200px) {
+    nav {
+        grid-template-columns: .7fr .9fr auto;
+    }
+}

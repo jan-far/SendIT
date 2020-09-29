@@ -1,0 +1,348 @@
+html {
+    font-size: 16px;
+    line-height: 1.4;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+* {
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+main {
+    width: 100%;
+}
+
+.mt-2 {
+    margin: 40px 0;
+}
+
+.bannerTop {
+    height: 25em;
+    background-image: url("../image/connection-world-map-point.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: rgba(0, 0, 0, 0.596);
+    background-blend-mode: multiply;
+    margin-top: 50px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.bannerTop h1 {
+    font-size: 4.5vw;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    font-family: 'PT Serif', serif;
+    font-weight: 700;
+}
+
+.bannerTop p {
+    font-size: 1.5vw;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+}
+
+.bannerTop a::after{
+    content: "\f0a9";
+    display: inline-block;
+    position: relative;
+    font:  14px/1 FontAwesome;
+    font-size: 16px;
+    line-height: 28px;
+    color: #000;
+    border-left: 1px solid #FFCD47;
+    margin-left: 10px;
+    padding-left: 10px;
+    text-rendering: auto;
+    transition: all 0.5s ease;
+}
+
+h2 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 600;
+    width: 100%;
+    text-align: center;
+    padding: 0px 0 20px 0;
+    position: relative;
+}
+
+h2 hr {
+    width: 6%;
+    margin: 0.3em auto 0 auto;
+    height: 5px;
+    background-color: #eb392e;
+    border-radius: 1em;
+    border: none;
+}
+
+.details-btn {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    background-color: #eb392e;
+    padding: 15px 30px;
+    text-align: center;
+    border: 1px solid #EB392E;
+    margin-top: 1em;
+}
+
+.details-btn:hover {
+    color: #EB392E;
+    background-color: transparent;
+    border: 1px solid rgb(235, 57, 46);
+    font-weight: 700;
+}
+
+.btn-head:hover {
+    color: white!important;
+    background-color: transparent;
+    border: 1px solid rgb(235, 57, 46);
+    font-weight: 700;
+}
+
+.section,
+.section2 {
+    width: 90%;
+    margin: 80px auto 0 auto;
+}
+
+.image-wrapper{
+    margin-top: 40px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.wrapper-content1,
+.wrapper-content2,
+.wrapper-content3{
+    height: 18em;
+    width: 24%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color:rgb(24, 163, 6);
+    background-blend-mode: multiply;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+
+}
+
+.wrapper-content1 p,
+.wrapper-content2 p,
+.wrapper-content3 p{
+    height: 15%;
+    width: 100%;
+    padding: 15px 0;
+    margin-top: 150px 0 !important;
+    display: flex-end;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.5s ease;
+}
+
+.wrapper-content1:hover p,
+.wrapper-content2:hover p,
+.wrapper-content3:hover p{
+    height: 80%;
+    background-color: rgba(0, 0, 0, 0.65);
+    /* font-size: 1.3em; */
+}
+
+.works {
+    display: flex;
+    width: 100%; 
+    align-items: center;
+    justify-content: center;
+    justify-content: 20px;
+}
+
+.work1,
+.work2,
+.work3 {
+    height: 16em;
+    width: 24%;
+    padding: 40px;
+    border-radius: 5px;
+    background-color: white;
+    max-width: 70%;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.work1 a,
+.work2 a,
+.work3 a{
+    margin-top: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #262839;
+}
+
+.work1 p,
+.work2 p,
+.work3 p{
+text-align: center;
+transition: all 1s ease;
+}
+
+.work-header{
+    margin-bottom: 10px;
+    color: green;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .bannerTop {
+        height: 22em;
+    }
+    .bannerTop h1 {
+        font-size: 2em;
+        letter-spacing: 1px;
+        margin-bottom: 25px;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    .bannerTop p {
+        font-size: 1em;
+        letter-spacing: 1px;
+        margin-bottom: 30px;
+    }
+    h2 {
+        font-family: 'Raleway', sans-serif;
+        font-size: 600;
+        width: 100%;
+        text-align: center;
+        padding: 0px 0 20px 0;
+        position: relative;
+    }
+    .section {
+        width: 80%;
+        margin: 20px auto;
+    }
+    .image-wrapper{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        justify-items: center;
+        flex-direction: column;
+    }
+
+    .wrapper-content1,
+    .wrapper-content2,
+    .wrapper-content3,
+    .work1,
+    .work2,
+    .work3{
+        height: 19em;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .wrapper-content1:hover p,
+    .wrapper-content2:hover p,
+    .wrapper-content3:hover p{
+    height: 50%;
+    background-color: rgba(0, 0, 0, 0.65);
+    }
+    
+    .works {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: column;
+    }
+
+    .work1 a,
+    .work2 a,
+    .work3 a{
+        margin-top: 30px;
+        text-decoration: none;
+        font-weight: bold;
+        color: #262839;
+    }
+
+    .work1 p,
+    .work2 p,
+    .work3 p{
+    text-align: center;
+    transition: all 1s ease;
+    }
+
+    .about-us-container {
+        flex-wrap: wrap;
+    }
+    
+    .about-image-wrapper {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .about-image {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .text-content {
+        width: 100%;
+        margin: 0 0 0 0;
+    }
+    .about-us-text{
+        width: 100%;
+        height: 100px;
+        overflow: hidden;
+    }
+    .about-us-text-toggle{
+        width: 100%;
+        height: initial;
+        overflow: auto;
+    }
+    
+    .active-slide {
+        display: block;
+        padding: 0.5em;
+        animation: fade 1.5s;
+    }
+
+    .slide-text{
+        font-size: 1em;
+    }
+
+    .slide-image, .slide-text {
+        width: 100%;
+    }
+
+}

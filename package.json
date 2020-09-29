@@ -4,35 +4,53 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require @babel/register --exit",
-    "build": "babel server.js --out-dir build",
-    "dev-start": "babel-watch server.js"
+    "test": "mocha --require @babel/polyfill --require @babel/register --exit",
+    "lint": "eslint usingDB --fix",
+    "clean": "rimraf build && mkdir build",
+    "build-babel": "babel usingDB -d build/usingDB && babel usingJSObject -d build/usingJSObject && babel server.js -d build",
+    "build": "npm run clean && npm run build-babel",
+    "start": "node db.js createUserTable && node db.js createParcelTable && babel-node server.js",
+    "dev": "babel-watch server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/node": "^7.10.5",
+    "@babel/polyfill": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/register": "^7.11.5",
+    "@hapi/joi": "^17.1.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-watch": "^7.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "client-sessions": "^0.8.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "json5": "^2.1.3",
     "jsonwebtoken": "^8.5.1",
-    "make-runnable": "^1.3.6",
-    "mocha": "^8.0.1",
-    "moment": "^2.27.0",
-    "nodemon": "^2.0.4",
-    "pg": "^8.2.1",
-    "uuid": "^8.1.0"
+    "make-runnable": "^1.3.8",
+    "mocha": "^8.1.3",
+    "moment": "^2.28.0",
+    "pg": "^8.3.3",
+    "uuid": "^8.3.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.3",
-    "@babel/preset-env": "^7.10.4",
-    "@babel/register": "^7.10.3",
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-watch": "^7.0.0"
+    "chalk": "^4.1.0",
+    "debug": "^4.2.0",
+    "eslint": "^7.9.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "nodemon": "^2.0.4",
+    "rimraf": "^3.0.2"
+  },
+  "engines": {
+    "node": "10"
   }
 }
