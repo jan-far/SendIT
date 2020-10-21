@@ -38,11 +38,11 @@ const User = {
       const { rows } = await db.query(createQuery, values);
       const token = help.generateToken(rows[0].id);
       [req.session] = rows;
-      console.log(req.session.user);
-      return res.status(200).send({ message: 'User successfully created', token });
+      console.log(req.session[0]);
+      return res.status(200).send({ status: 200, message: 'User successfully created', Token: token });
     } catch (err) {
       if (err.routine === '_bt_check_unique') {
-        return res.status(400).send({ message: 'User with EMAIL already exist' });
+        return res.status(400).send({ status: 400, message: 'User with EMAIL already exist' });
       }
       return res.status(400).send(err.detail);
     }
@@ -100,6 +100,11 @@ const User = {
       console.log(error);
       return res.status(400).send(error);
     }
+  },
+
+  async logout(req, res) {
+    console.log('log out server side');
+    return req.authenticated.reset();
   },
 };
 

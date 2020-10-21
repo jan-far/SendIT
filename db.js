@@ -44,7 +44,7 @@ const createParcelTable = () => {
   const queryText = `CREATE TABLE IF NOT EXISTS 
           parcels(
               id UUID PRIMARY KEY,
-              email TEXT NOT NULL,
+              recipient TEXT NOT NULL,
               weight TEXT NOT NULL,
               destination TEXT NOT NULL,
               phone TEXT NOT NULL,

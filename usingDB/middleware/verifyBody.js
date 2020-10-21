@@ -39,12 +39,12 @@ const ValidateRegisterBody = {
           .replace('email', 'Email')
           .replace('password', 'Password');
 
-        return res.status(400).send({ message: `${msg}` });
+        return res.status(400).send({ status: 400, message: `${msg}` });
       }
 
       req.body.email = req.body.email.toLowerCase();
 
-      return next();
+      next();
     } catch (error) {
       res.status(error.c || 500).json({
         statusCode: error.c || 500,
@@ -58,20 +58,15 @@ const ValidateRegisterBody = {
 
     try {
       const requestBodySchema = Joi.object({
-        email: Joi.string()
-          .email({
-            minDomainSegments: 2,
-            tlds: { allow: ['com', 'net', 'org'] },
-          })
-          .required(),
+        recipient: Joi.string().required(),
         destination: Joi.string().required(),
-        weight: Joi.number().required(),
+        weight: Joi.number().required().max(300),
         phone: Joi.number(),
-        location: Joi.string().alphanum()
-          .required(),
+        location: Joi.string().alphanum().required(),
       });
 
       const { error } = requestBodySchema.validate({ ...req.body });
+      // console.log(error);
 
       // Check if error was found duruing validtion
       if (error) {

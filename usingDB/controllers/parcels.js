@@ -6,18 +6,18 @@ import role from '../config/config';
 const Parcel = {
 
   async create(req, res) {
-    if (!req.body.email && !req.body.weight && !req.body.destination && !req.body.phone) {
+    if (!req.body.recipient && !req.body.weight && !req.body.destination && !req.body.phone) {
       return res.status(400).send({ message: 'All fields are required' });
     }
 
     const text = `INSERT INTO 
-        parcels(id, email, weight, destination, phone, owner_id, status, location, created_date, modified_date)
+        parcels(id, recipient, weight, destination, phone, owner_id, status, location, created_date, modified_date)
         VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
         returning *`;
 
     const values = [
       uuid(),
-      req.body.email,
+      req.body.recipient,
       req.body.weight,
       req.body.destination,
       req.body.phone,
