@@ -6,10 +6,6 @@ import role from '../config/config';
 const Parcel = {
 
   async create(req, res) {
-    if (!req.body.recipient && !req.body.weight && !req.body.destination && !req.body.phone) {
-      return res.status(400).send({ message: 'All fields are required' });
-    }
-
     const text = `INSERT INTO 
         parcels(id, recipient, weight, destination, phone, owner_id, status, location, created_date, modified_date)
         VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
@@ -108,7 +104,10 @@ const Parcel = {
         req.params.id,
       ];
       const response = await db.query(updateOneQuery, values);
-      return res.status(200).send(response.rows[0]);
+      return res.status(200).send({
+        Update: response.rows[0],
+        message: 'Status Updated successfully',
+      });
     } catch (err) {
       return res.status(400).send({
         err,
@@ -135,7 +134,7 @@ const Parcel = {
       const response = await db.query(updateOneQuery, values);
       return res.status(200).send({
         Update: response.rows[0],
-        message: 'Updated successfully',
+        message: 'Location Updated successfully',
       });
     } catch (err) {
       return res.status(400).send({

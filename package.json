@@ -23,6 +23,7 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/register": "^7.11.5",
     "@hapi/joi": "^17.1.1",
+    "async": "^3.2.0",
     "babel-preset-env": "^1.7.0",
     "babel-watch": "^7.0.0",
     "bcryptjs": "^2.4.3",

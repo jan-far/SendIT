@@ -9,7 +9,7 @@ const accessLevels = {
 };
 
 const status = {
-  default: 'Processing',
+  default: 'processing',
 };
 
 export default { accessLevels, userRoles, status };

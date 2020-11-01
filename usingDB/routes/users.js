@@ -9,6 +9,4 @@ router.post('/auth/signin', Right.User.login);
 router.get('/users', auth.userRole, Right.User.getUser);
 router.get('/logout', Right.User.logout);
 
-router.post('/admin/signup', validator.userValidator, Right.Admin.create);
-
 export default router;

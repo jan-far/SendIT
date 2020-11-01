@@ -35,10 +35,13 @@ const adminRole = async (req, res, next) => {
       req.user = { id: decoded.userId };
       next();
     } else {
-      return res.status(403).send({ 'Oops!': 'You are not authorized' });
+      return res.status(403).send({
+        statusCode: 400,
+        message: 'You are not authorized',
+      });
     }
   } catch (error) {
-    return res.status(400).send(error);
+    return res.status(500).send(error);
   }
 };
 
