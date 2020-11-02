@@ -82,7 +82,10 @@ const Parcel = {
         req.user.id,
       ];
       const response = await db.query(updateOneQuery, values);
-      return res.status(200).send(response.rows[0]);
+      return res.status(200).send({
+        Update: response.rows[0],
+        message: 'Destination Updated successfully',
+      });
     } catch (err) {
       return res.status(400).send(err);
     }
