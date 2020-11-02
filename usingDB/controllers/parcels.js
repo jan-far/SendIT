@@ -87,7 +87,10 @@ const Parcel = {
         message: 'Destination Updated successfully',
       });
     } catch (err) {
-      return res.status(400).send(err);
+      return res.status(400).send({
+        err,
+        message: 'Failed to update parcel destination! Try again...',
+      });
     }
   },
 
