@@ -3,7 +3,6 @@ import { v4 as uuid } from 'uuid';
 import help from '../config/helper';
 import role from '../config/config';
 import db from '../index';
-import { forEach } from 'async';
 
 const Admin = {
 
@@ -65,6 +64,10 @@ const Admin = {
       // Check if user password is correct
       if (!help.comparePassword(rows[0].password, req.body.password)) {
         return res.status(400).send({ message: 'The credentials you provided is incorrect, check your password' });
+      }
+
+      if (rows[0].role !== role.accessLevels.admin) {
+        return res.status(400).send({ message: 'You are not authorized' });
       }
 
       const token = help.generateToken(rows[0].id);
