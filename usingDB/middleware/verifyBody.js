@@ -21,7 +21,7 @@ const ValidateRegisterBody = {
             'any.only': 'Repeat password must match password',
           }),
         phone: Joi.number(),
-        location: Joi.string().regex(/[a-zA-Z0-9,.]/g).required(),
+        location: Joi.string().regex(/[a-zA-Z0-9,.]/i).required(),
       });
 
       const { error } = requestBodySchema.validate({ ...req.body });
@@ -61,7 +61,7 @@ const ValidateRegisterBody = {
         destination: Joi.string().required(),
         weight: Joi.number().required().max(300),
         phone: Joi.number(),
-        location: Joi.string().regex(/[a-zA-Z0-9,.]/g).required(),
+        location: Joi.string().regex(/[a-zA-Z0-9,.]/i).required(),
       });
 
       const { error } = requestBodySchema.validate({ ...req.body });
