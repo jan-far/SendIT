@@ -1,6 +1,6 @@
 import db from '../index';
 
-export default async function getauthenticated(req, res) {
+export default async function getauthenticated(req, res, next) {
   if (req.authenticated) {
     const findOneQuery = 'SELECT * FROM users WHERE email=$1';
     try {

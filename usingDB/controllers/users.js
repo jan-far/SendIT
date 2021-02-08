@@ -5,13 +5,14 @@ import role from '../config/config';
 import db from '../index';
 
 const User = {
-
   async create(req, res) {
     if (!req.body.firstname || !req.body.lastname || !req.body.email || !req.body.password || !req.body.phone) {
       return res.status(404).send({ message: 'Some values are missing!' });
     }
     if (!help.isValidEmail(req.body.email)) {
-      return res.status(404).send({ message: 'Please enter a valid email address!' });
+      return res
+        .status(404)
+        .send({ message: 'Please enter a valid email address!' });
     }
 
     const hashPassword = help.hashPassword(req.body.password);
@@ -39,10 +40,16 @@ const User = {
       const token = help.generateToken(rows[0].id);
       [req.session] = rows;
       console.log(req.session[0]);
-      return res.status(200).send({ status: 200, message: 'User successfully created', Token: token });
+      return res.status(200).send({
+        status: 200,
+        message: 'User successfully created',
+        Token: token,
+      });
     } catch (err) {
       if (err.routine === '_bt_check_unique') {
-        return res.status(400).send({ status: 400, message: 'User with EMAIL already exist' });
+        return res
+          .status(400)
+          .send({ status: 400, message: 'User with EMAIL already exist' });
       }
       return res.status(400).send(err.detail);
     }
@@ -53,17 +60,24 @@ const User = {
       return res.status(404).send({ message: 'Some values are missing!' });
     }
     if (!help.isValidEmail(req.body.email)) {
-      return res.status(404).send({ message: 'Please enter a valid email address!' });
+      return res
+        .status(404)
+        .send({ message: 'Please enter a valid email address!' });
     }
 
     const text = 'SELECT * FROM users WHERE email = $1';
     try {
       const { rows } = await db.query(text, [req.body.email]);
       if (!rows[0]) {
-        return res.status(400).send({ message: 'The credentials you provided is incorrect' });
+        return res
+          .status(400)
+          .send({ message: 'The credentials you provided is incorrect' });
       }
       if (!help.comparePassword(rows[0].password, req.body.password)) {
-        return res.status(400).send({ message: 'The credentials you provided is incorrect, check your password' });
+        return res.status(400).send({
+          message:
+            'The credentials you provided is incorrect, check your password',
+        });
       }
       // console.log(rows[0]);
       const token = help.generateToken(rows[0].id);
@@ -71,6 +85,7 @@ const User = {
       [req.authenticated] = rows;
       req.authenticated.token = token;
       // console.log('auth', req.authenticated);
+      delete rows[0].password;
 
       res.status(200).send({
         message: 'User login successful!',
@@ -89,6 +104,7 @@ const User = {
       const { rows } = await db.query(findOneQuery, [req.user.id]);
 
       const token = help.generateToken(rows[0].id);
+      delete rows[0].password;
 
       return res.status(200).send({
         message: 'User found successfully!',

@@ -25,8 +25,6 @@ const ValidateRegisterBody = {
       });
 
       const { error } = requestBodySchema.validate({ ...req.body });
-      // console.log(JSON.parse(value));
-      console.log(error);
 
       // Check if error was found duruing validtion
       if (error) {
@@ -65,7 +63,6 @@ const ValidateRegisterBody = {
       });
 
       const { error } = requestBodySchema.validate({ ...req.body });
-      // console.log(error);
 
       // Check if error was found duruing validtion
       if (error) {
