@@ -54,7 +54,6 @@ const Admin = {
     const text = 'SELECT * FROM users WHERE email = $1';
     try {
       const { rows } = await db.query(text, [req.body.email]);
-      console.log(rows[0]);
 
       // Check if user exist
       if (!rows[0]) {
@@ -66,6 +65,7 @@ const Admin = {
         return res.status(400).send({ message: 'The credentials you provided is incorrect, check your password' });
       }
 
+      // Check if user is admin
       if (rows[0].role !== role.accessLevels.admin) {
         return res.status(400).send({ message: 'You are not authorized' });
       }
@@ -83,6 +83,34 @@ const Admin = {
     } catch (error) {
       console.log(error);
       return res.status(400).send(error);
+    }
+  },
+
+  authenticate(req, res) {
+    try {
+      const { credentials } = req.user;
+
+      const filteredCredentials = {
+        id: credentials.id,
+        firstname: credentials.firstname,
+        lastname: credentials.lastname,
+        email: credentials.email,
+        location: credentials.location,
+        phone: credentials.phone,
+        role: credentials.role,
+        token: credentials.token,
+      };
+
+      // Send response
+      res.status(200).json({
+        Profile: {
+          ...filteredCredentials,
+        },
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: 'SignIn again. Authentication failed!',
+      });
     }
   },
 
@@ -164,53 +192,5 @@ const Admin = {
     }
   },
 };
-
-const functions = `
-CREATE OR REPLACE FUNCTION get_all_user() RETURNS SETOF users AS
-$BODY$
-DECLARE
-    r users;
-BEGIN
-    FOR r IN
-        SELECT * FROM users
-    LOOP
-        -- can do some processing here
-        RETURN NEXT r; -- return current row of SELECT
-    END LOOP;
-    RETURN;
-END
-$BODY$
-$$LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION get_user_parcel(id INT) RETURNS SETOF parcels AS
-$BODY$
-BEGIN
-    RETURN QUERY SELECT * FROM parcels WHERE owner_id=$1;
-
-    -- Since execution is not finished, we can check whether rows were returned
-    -- and raise exception if not.
-    IF NOT FOUND THEN
-        RAISE EXCEPTION 'No parcel at %.', $1;
-    END IF;
-
-    RETURN;
-END
-$BODY$
-$$LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION get() RETURNS SETOF parcels AS $BODY$
-DECLARE
-    r users
-BEGIN 
-    FOR r IN SELECT id FROM users
-    LOOP
-        IF r IS NOT NULL OR r!=''
-          RETURN NEXT SELECT * FROM parcels WHERE owner_id=$1 VALUES (r);
-      END LOOP;
-      RETURN;
-END
-$BODY$
-LANGUAGE plpgsql;
-`;
 
 export default Admin;

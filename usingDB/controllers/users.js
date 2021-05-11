@@ -10,9 +10,7 @@ const User = {
       return res.status(404).send({ message: 'Some values are missing!' });
     }
     if (!help.isValidEmail(req.body.email)) {
-      return res
-        .status(404)
-        .send({ message: 'Please enter a valid email address!' });
+      return res.status(404).send({ message: 'Please enter a valid email address!' });
     }
 
     const hashPassword = help.hashPassword(req.body.password);
@@ -38,20 +36,20 @@ const User = {
     try {
       const { rows } = await db.query(createQuery, values);
       const token = help.generateToken(rows[0].id);
-      [req.session] = rows;
-      console.log(req.session[0]);
+      delete rows[0].password;
+      rows[0].token = token;
+
       return res.status(200).send({
         status: 200,
         message: 'User successfully created',
+        Profile: rows[0],
         Token: token,
       });
     } catch (err) {
       if (err.routine === '_bt_check_unique') {
-        return res
-          .status(400)
-          .send({ status: 400, message: 'User with EMAIL already exist' });
+        return res.status(400).send({ status: 400, message: 'User with EMAIL already exist' });
       }
-      return res.status(400).send(err.detail);
+      return res.status(500).send(err.detail);
     }
   },
 
@@ -60,46 +58,37 @@ const User = {
       return res.status(404).send({ message: 'Some values are missing!' });
     }
     if (!help.isValidEmail(req.body.email)) {
-      return res
-        .status(404)
-        .send({ message: 'Please enter a valid email address!' });
+      return res.status(404).send({ message: 'Please enter a valid email address!' });
     }
 
     const text = 'SELECT * FROM users WHERE email = $1';
     try {
       const { rows } = await db.query(text, [req.body.email]);
       if (!rows[0]) {
-        return res
-          .status(400)
-          .send({ message: 'The credentials you provided is incorrect' });
+        return res.status(400).send({ message: 'The credentials you provided is incorrect' });
       }
       if (!help.comparePassword(rows[0].password, req.body.password)) {
         return res.status(400).send({
-          message:
-            'The credentials you provided is incorrect, check your password',
+          message: 'The credentials you provided is incorrect, check your password',
         });
       }
       // console.log(rows[0]);
       const token = help.generateToken(rows[0].id);
 
-      [req.authenticated] = rows;
-      req.authenticated.token = token;
-      // console.log('auth', req.authenticated);
       delete rows[0].password;
+      rows[0].token = token;
 
       res.status(200).send({
         message: 'User login successful!',
         Profile: rows[0],
       });
     } catch (error) {
-      console.log(error);
-      return res.status(400).send(error);
+      return res.status(500).send({ message: error.detail });
     }
   },
 
   async getUser(req, res) {
     const findOneQuery = 'SELECT * FROM users WHERE id=$1';
-
     try {
       const { rows } = await db.query(findOneQuery, [req.user.id]);
 
@@ -112,14 +101,36 @@ const User = {
         Token: token,
       });
     } catch (error) {
-      console.log(error);
-      return res.status(400).send(error);
+      return res.status(500).send(error);
     }
   },
 
-  async logout(req, res) {
-    console.log('log out server side');
-    return req.authenticated.reset();
+  authenticate(req, res) {
+    try {
+      const { credentials } = req.user;
+
+      const filteredCredentials = {
+        id: credentials.id,
+        firstname: credentials.firstname,
+        lastname: credentials.lastname,
+        email: credentials.email,
+        location: credentials.location,
+        phone: credentials.phone,
+        role: credentials.role,
+        token: credentials.token,
+      };
+
+      // Send response
+      res.status(200).json({
+        Profile: {
+          ...filteredCredentials,
+        },
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: 'SignIn again. Authentication failed!',
+      });
+    }
   },
 };
 

@@ -10,6 +10,9 @@ router.post('/admin/signup', validator.userValidator, Right.create);
 // Admin signUp
 router.post('/admin/signin', Right.login);
 
+// Authenticate admin
+router.get('/admin/authenticate', auth.adminRole, Right.authenticate);
+
 // Get all users
 router.get('/admin/users', auth.adminRole, Right.getUsers);
 

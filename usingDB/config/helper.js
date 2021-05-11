@@ -3,26 +3,26 @@ import jwt from 'jsonwebtoken';
 
 const Helper = {
   /**
-     * Hash Password Method
-     */
+   * Hash Password Method
+   */
   hashPassword(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
   },
   /**
-     * comparePassword
-     */
+   * comparePassword
+   */
   comparePassword(hashPassword, password) {
     return bcrypt.compareSync(password, hashPassword);
   },
   /**
-     * isValidEmail helper method
-     */
+   * isValidEmail helper method
+   */
   isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
   },
   /**
-     * Gnerate Token
-     */
+   * Generate Token
+   */
   generateToken(id) {
     const token = jwt.sign({
       userId: id,
